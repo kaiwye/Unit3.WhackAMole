@@ -1,12 +1,19 @@
+import { useState } from "react";
 import Welcome from "./Components/Welcome/Welcome";
-import HighScores from "./Components/HighScores/HighScores";
+import Game from "./Components/Game/Game";
 
 export default function App() {
+  const [gameStart, setGameStart] = useState(false);
+
+  const startGame = () => {
+    setGameStart(true);
+  };
+
   return (
     <>
       <h1>Whack A Mole</h1>
-      <Welcome />
-      <HighScores />
+      {!gameStart && <Welcome startGame={startGame} />}
+      {gameStart && <Game />}
     </>
   );
 }

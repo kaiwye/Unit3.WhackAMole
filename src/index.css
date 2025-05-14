@@ -1,3 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: beige;
+}
+
+#root {
+  max-width: 35rem;
+  padding: 1rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1 {
+  padding-bottom: 2rem;
+}
 
 .hole {
   background: url("/hole.png") no-repeat center/contain;
@@ -6,4 +23,3 @@
 .mole {
   background-image: url("/mole.png");
 }
-

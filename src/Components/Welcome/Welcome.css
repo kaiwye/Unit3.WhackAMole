@@ -1,0 +1,16 @@
+.welcome {
+  display: grid;
+  width: 40%;
+  gap: 2ch;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+button {
+  padding: 0.5rem;
+  border: 1px solid black;
+}
+
+button:hover {
+  background-color: burlywood;
+}

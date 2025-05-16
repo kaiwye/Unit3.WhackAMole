@@ -1,15 +1,15 @@
 import { useGame } from "./GameScoreKeeper";
 import "./Game.css";
 
-export default function Game({ restartGame }) {
-  const { field, score, whackMole } = useGame();
+export default function Game() {
+  const { field, score, whackMole, time, resetGame } = useGame();
 
   return (
     <>
       <div className="scoreboard">
         <button>Score: {score}</button>
-        <button>Timer</button>
-        <button onClick={restartGame}>Restart</button>
+        <button>Time: {time}</button>
+        <button onClick={resetGame}>Restart</button>
       </div>
 
       <div className="field">

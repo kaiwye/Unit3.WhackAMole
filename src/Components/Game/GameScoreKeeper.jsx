@@ -1,14 +1,25 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect, useRef } from "react";
 
 const GameContext = createContext();
 
 const numHoles = 9;
+const timeLimit = 15;
 
 export default function GameProvider({ children }) {
   const [field, setField] = useState(makeField());
   const [score, setScore] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false);
   const [highScores, setHighScores] = useState([]);
+  const [time, setTime] = useState(timeLimit);
+  const timer = useRef();
+
+  useEffect(() => {
+    if (time === 0) stopGame();
+  }, [time]);
+
+  useEffect(() => {
+    return () => clearInterval(timer.current);
+  }, []);
 
   function makeField(initialField = []) {
     const newField = Array(numHoles).fill(false);
@@ -21,9 +32,27 @@ export default function GameProvider({ children }) {
   }
 
   const whackMole = () => {
-    if (!playing) return;
-    setScore((s) => s + 1);
-    setField((initial) => makeField(initial));
+    setField(makeField(field));
+    setScore(score + 1);
+  };
+
+  const startGame = () => {
+    clearInterval(timer.current);
+    setScore(0);
+    setTime(timeLimit);
+    setField(makeField());
+    setPlaying(true);
+    timer.current = setInterval(() => setTime((time) => time - 1), 1000);
+  };
+
+  const stopGame = () => {
+    setHighScores((initial) => {
+      const newScore = [...initial, score].sort((a, b) => b - a).slice(0, 5);
+      return newScore;
+    });
+    setPlaying(false);
+    clearInterval(timer.current);
+    setTime(timeLimit);
   };
 
   const resetGame = () => {
@@ -31,9 +60,7 @@ export default function GameProvider({ children }) {
       const newScore = [...initial, score].sort((a, b) => b - a).slice(0, 5);
       return newScore;
     });
-    setScore(0);
-    setField(makeField());
-    setPlaying(true);
+    startGame();
   };
 
   return (
@@ -46,6 +73,9 @@ export default function GameProvider({ children }) {
         playing,
         setPlaying,
         highScores,
+        startGame,
+        stopGame,
+        time,
       }}
     >
       {children}

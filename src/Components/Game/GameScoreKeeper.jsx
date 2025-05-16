@@ -8,6 +8,7 @@ export default function GameProvider({ children }) {
   const [field, setField] = useState(makeField());
   const [score, setScore] = useState(0);
   const [playing, setPlaying] = useState(true);
+  const [highScores, setHighScores] = useState([]);
 
   function makeField(initialField = []) {
     const newField = Array(numHoles).fill(false);
@@ -26,6 +27,10 @@ export default function GameProvider({ children }) {
   };
 
   const resetGame = () => {
+    setHighScores((initial) => {
+      const newScore = [...initial, score].sort((a, b) => b - a).slice(0, 5);
+      return newScore;
+    });
     setScore(0);
     setField(makeField());
     setPlaying(true);
@@ -33,7 +38,15 @@ export default function GameProvider({ children }) {
 
   return (
     <GameContext.Provider
-      value={{ field, score, whackMole, resetGame, playing, setPlaying }}
+      value={{
+        field,
+        score,
+        whackMole,
+        resetGame,
+        playing,
+        setPlaying,
+        highScores,
+      }}
     >
       {children}
     </GameContext.Provider>

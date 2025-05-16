@@ -1,16 +1,17 @@
 .welcome {
   display: grid;
-  width: 40%;
   gap: 2ch;
-  margin: 0 auto;
-  margin-bottom: 2rem;
+  max-width: 30ch;
+  margin: 0 auto 2rem auto;
 }
 
-button {
+.welcome button {
   padding: 0.5rem;
   border: 1px solid black;
+  font-family: monospace;
 }
 
-button:hover {
+.welcome button:hover {
+  cursor: pointer;
   background-color: burlywood;
 }

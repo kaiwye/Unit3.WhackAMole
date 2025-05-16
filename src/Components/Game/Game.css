@@ -1,0 +1,35 @@
+.field {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 1rem;
+  gap: 2rem;
+  margin: 0 auto;
+}
+
+.hole {
+  width: 125px;
+  height: 125px;
+  background: url("/hole.png") no-repeat center/contain;
+}
+
+.mole {
+  background-image: url("/mole.png");
+  cursor: pointer;
+}
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.scoreboard button {
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  font-family: monospace;
+}
+
+.scoreboard button:hover:last-child {
+  background-color: burlywood;
+  cursor: pointer;
+}

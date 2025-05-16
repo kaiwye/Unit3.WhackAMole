@@ -56,11 +56,7 @@ export default function GameProvider({ children }) {
   };
 
   const resetGame = () => {
-    setHighScores((initial) => {
-      const newScore = [...initial, score].sort((a, b) => b - a).slice(0, 5);
-      return newScore;
-    });
-    startGame();
+    stopGame();
   };
 
   return (
